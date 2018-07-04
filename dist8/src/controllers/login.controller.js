@@ -22,6 +22,9 @@ let LoginController = class LoginController {
         this.userRepo = userRepo;
     }
     async logIn(email, password) {
+        if (!email || !password) {
+            throw new rest_1.HttpErrors.Unauthorized('Invalid email or password.');
+        }
         return await this.userRepo.find({
             where: {
                 email, password

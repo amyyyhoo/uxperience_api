@@ -23,12 +23,16 @@ let RegistrationController = class RegistrationController {
         this.userRepo = userRepo;
     }
     async createUser(user) {
+        if (!user.email || !user.password) {
+            throw new rest_1.HttpErrors.BadRequest('missing data');
+        }
+        // Check that user does not already exist
+        let userExists = !!(await this.userRepo.count({ email: user.email }));
+        if (userExists) {
+            throw new rest_1.HttpErrors.BadRequest('user already exists');
+        }
         let createdUser = await this.userRepo.create(user);
         return createdUser;
-        /*
-        pizza.status = "received";
-        return pizza;
-        */
     }
 };
 __decorate([

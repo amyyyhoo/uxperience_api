@@ -29,7 +29,7 @@ class UxperienceApplication extends boot_1.BootMixin(repository_1.RepositoryMixi
             port: 3306,
             database: 'project',
             user: 'root',
-            password: ''
+            password: 'root1234'
         });
         this.dataSource(dataSourceConfig);
     }
